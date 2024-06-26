@@ -114,6 +114,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AFRICASTKNG_USERNAME = os.getenv('USER_NAME')
+AFRICASTKNG_API_KEY = os.getenv('API_KEY')
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
