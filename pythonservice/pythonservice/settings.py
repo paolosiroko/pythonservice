@@ -40,7 +40,11 @@ INSTALLED_APPS = [
     "rest_framework",
     "orders",
     "customers",
-    "africastalking"
+    "africastalking",
+    'oauth2_provider',
+    'social_django',
+    'corsheaders',
+    'oidc_provider',
 ]
 
 MIDDLEWARE = [
@@ -96,6 +100,28 @@ DATABASES = {
 #   }
 
 
+OAUTH2_PROVIDER = {
+    "OIDC_ENABLED": True,
+    "OIDC_RSA_PRIVATE_KEY": os.getenv("OIDC_RSA_PRIVATE_KEY"),
+    "SCOPES": {
+        "openid": "OpenID Connect scope",
+        "read": 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups',
+        # ... any other scopes that you use
+    },
+    # ... any other settings you want
+}
+LOGIN_URL = '/admin/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    ),
+
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -113,6 +139,18 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+
+OKTA_DOMAIN =  os.getenv('OKTA_DOMAIN')
+OIDC_RP_CLIENT_ID = os.getenv('OKTA_CLIENTID')
+OIDC_RP_CLIENT_SECRET = os.getenv('OKTA_CLIENTSECRET')
+OIDC_RP_SIGN_ALGO = "RS256"
+OIDC_OP_AUTHORIZATION_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/authorize" # The OIDC authorization endpoint
+OIDC_RP_TOKEN_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/token" # The OIDC token endpoint
+OIDC_OP_USER_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/userinfo" # The OIDC userinfo endpoint
+OIDC_OP_TOKEN_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/token" # The OIDC token endpoint
+OIDC_OP_JWKS_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/keys" # The OIDC JWKS endpoint
+
 
 AFRICASTKNG_USERNAME = os.getenv('USER_NAME')
 AFRICASTKNG_API_KEY = os.getenv('API_KEY')

@@ -1,18 +1,21 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets,permissions
+from rest_framework.permissions import AllowAny
 from .models import Orders
 from .serializers import OrderSerializer
 import africastalking
 from django.conf import settings
 from rest_framework.response import Response
 
-# user_name = settings.AFRICASTKNG_USERNAME
-# api_key = settings.AFRICASTKNG_API_KEY
+user_name = settings.AFRICASTKNG_USERNAME
+api_key = settings.AFRICASTKNG_API_KEY
 
 africastalking.initialize(username=user_name,api_key=api_key)
 
 
 class OrderViewSet(viewsets.ModelViewSet):
+    # permission_classes = [AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
     queryset =Orders.objects.all()
     serializer_class = OrderSerializer
 
