@@ -102,7 +102,7 @@ When order is made using order api endpoint provided above asample message  shou
 I have deployed the python service on [Render.com](https://dashboard.render.com/) connected with Postgres database from Render.
 
 ```
-https://pythonservice-1.onrender.com
+https://pythonservice.onrender.com
 ```
 Test the python service by adding  this url to the above endpoints using the API Documentation section.
 For superuser credentials use admin for both  password and username.
