@@ -31,7 +31,7 @@ jobs:
       - name: Run Tests
         run: |
             cd pythonservice/pythonservice
-            coverage run -m pytest tests
+            coverage run -m pytest 
             coverage report -m
         
 
