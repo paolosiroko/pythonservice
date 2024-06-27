@@ -30,7 +30,7 @@ jobs:
           export DJANGO_SETTINGS_MODULE=webservice.settings
       - name: Run Tests
         run: |
-            cd pythonservice/pythonservice
+            cd pythonservice
             coverage run -m pytest 
             coverage report -m
         
