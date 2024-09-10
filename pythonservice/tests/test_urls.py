@@ -17,7 +17,7 @@ class UrlsTestCase(TestCase):
         self.order = Orders.objects.create(customer=self.customer, item='Test Item', amount=1)
 
         # Include OAuth2 authentication headers
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer YOUR_ACCESS_TOKEN')
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer BLwUfa013yOIhCHUQpjShL4J8vW9uP')
 
     def test_customer_list_url(self):
         response = self.client.get('/api/customer/')
